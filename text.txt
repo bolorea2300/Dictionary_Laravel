@@ -1,0 +1,30 @@
+$title = $request->title;
+        $tags = $request->tags;
+        $explain = $request->explain;
+
+        $page = Dictionary::create([
+            'user_id' => $user_id,
+            'title' => $title,
+            'tags' => $tags,
+            'explain' => $explain,
+        ]);
+
+//this.page = Math.ceil(this.total / 12)
+
+$route(before, after) {
+      if (after.query.page) {
+        this.page = after.query.page
+      }
+    },
+
+const url = await this.$axios.$get('/api/auth/check')
+
+    try {
+      const check = await $axios.$get(url)
+      commit('setAuth', {
+        token: check.access_token,
+        user: check.user,
+      })
+    } catch {
+      console.log('ログインしていません')
+    }
